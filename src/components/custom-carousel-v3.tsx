@@ -41,33 +41,39 @@ const sliderData: SliderDataType[] = [
 		width: 300,
 		height: 230,
 	},
+	{
+		id: 4,
+		path: '/assets/image/tailwind.webp',
+		alt: 'Image',
+		width: 300,
+		height: 230,
+	},
+	{
+		id: 5,
+		path: '/assets/image/typescript.webp',
+		alt: 'Image',
+		width: 300,
+		height: 230,
+	},
 ];
 
-export const CustomCarousel = ({ className }: { className?: string }) => {
+export const CustomCarouselV3 = ({ className }: { className?: string }) => {
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
-	// const [count, setCount] = useState(0);
 
 	useEffect(() => {
 		if (!api) {
 			return;
 		}
-
-		// setCount(api.scrollSnapList().length);
 		setCurrent(api.selectedScrollSnap());
-
 		api.on('select', () => {
 			setCurrent(api.selectedScrollSnap());
 		});
 	}, [api]);
 
 	return (
-		<div className={cn(
-			className
-		)}>
-			<h1 className='text-2xl font-bold mb-4 text-center'>
-				Custom slider
-			</h1>
+		<div className={cn(className)}>
+			<h1 className="text-2xl font-bold mb-4 text-center">Custom slider V3</h1>
 			<Carousel
 				setApi={setApi}
 				opts={{ loop: true }}
@@ -88,12 +94,27 @@ export const CustomCarousel = ({ className }: { className?: string }) => {
 						</CarouselItem>
 					))}
 				</CarouselContent>
-				{/* <CarouselPrevious />
-				<CarouselNext /> */}
 			</Carousel>
-			<div className="flex items-center justify-center gap-x-3 mt-2">
-				<Button onClick={() => api?.scrollTo(current - 1)}>Left</Button>
-				<Button onClick={() => api?.scrollTo(current + 1)}>Right</Button>
+			<div className="flex items-center justify-around mt-2">
+				<div>
+					{sliderData.map((dot, index) => {
+						return (
+							<span
+								className={cn(
+									'bg-slate-300/70 inline-block w-4 h-2 mr-2 rounded-md cursor-pointer transition ease-in-out',
+									current === index && 'bg-amber-400 w-8'
+								)}
+								onClick={() => {
+									api?.scrollTo(index);
+								}}
+							/>
+						);
+					})}
+				</div>
+				<div className="flex items-center justify-center gap-x-3">
+					<Button onClick={() => api?.scrollTo(current - 1)}>Left</Button>
+					<Button onClick={() => api?.scrollTo(current + 1)}>Right</Button>
+				</div>
 			</div>
 		</div>
 	);
