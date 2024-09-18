@@ -3,6 +3,7 @@ import { CustomCarousel } from '@/components/custom-carousel';
 import { CustomCarouselV2 } from '@/components/custom-carousel-v2';
 import { CustomCarouselV3 } from '@/components/custom-carousel-v3';
 import { CustomCarouselV4 } from '@/components/custom-carousel-v4';
+import { CustomCarouselFullScreen } from '@/components/custom-carousel-full-screen';
 
 export default function Home() {
 	return (
@@ -15,6 +16,7 @@ export default function Home() {
 			<Separator />
 			<CustomCarouselV4 className="py-4" />
 			<Separator />
+			<CustomCarouselFullScreen />
 		</main>
 	);
 }
